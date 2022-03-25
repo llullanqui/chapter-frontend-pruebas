@@ -10,6 +10,8 @@ const HomePage = () => {
 
   const [characters, setCharacters] = useState([]);
   const [searchText, setSearchText] = useState('');
+  const [showEditor, setShowEditor] = useState(false);
+  const [currentCharacter, setCurrentCharacter] = useState(null);
   const componentIsMounted = useRef(true);
 
   const getCharacters = async (name) => {
@@ -69,7 +71,7 @@ const HomePage = () => {
         </div>
         <div className='spacer'/>
         <div className='button'>
-          <Button text={"Nuevo"} icon="add"/>
+          <Button text={"Nuevo"} icon="add" />
         </div>
       </div>
       <div className='spacer'/>

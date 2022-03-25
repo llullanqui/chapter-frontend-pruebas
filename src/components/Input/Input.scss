@@ -1,4 +1,4 @@
-.input-container {
+.input-component {
     display: flex;
     flex-direction: row;
     justify-content: left;
@@ -6,20 +6,23 @@
     border: 1px grey solid;
     border-radius: 4px;
     padding: 4px;
-}
+    background-color: white;
 
-.input-icon {
-    color: grey;
-}
-
-.input-input {
-    border: none;
-    height: 100%;
-    width: 100%;
-    outline: none;
-    color: grey;
-    
-    &:focus {
-        border: none;
+    .input-icon {
+        color: grey;
     }
+    
+    .input-input {
+        border: none;
+        height: 100%;
+        width: 100%;
+        outline: none;
+        color: grey;
+        background-color: transparent;
+        
+        &:focus {
+            border: none;
+        }
+    }
+
 }

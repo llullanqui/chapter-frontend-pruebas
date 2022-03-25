@@ -1,0 +1,40 @@
+.character-component {
+
+    .image-section {
+        padding: 0px;
+        margin: 0px;
+        .image {
+            height: auto;
+            width: 100%;
+            padding: 0px;
+            margin: 0px;
+        }
+    }
+
+    .low-section {
+        background-color: black;
+        padding-top: 12px;
+        padding-bottom: 12px;
+    
+        .character-name {
+            color: white;
+        }
+    
+        .button-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-left: 24px;
+            padding-right: 24px;
+            padding-top: 12px;
+    
+            .button {
+                width: 100%;
+            }
+    
+            .spacer {
+                width: 12px;
+            }
+        }
+    }
+}

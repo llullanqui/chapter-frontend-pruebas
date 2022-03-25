@@ -1,0 +1,45 @@
+.home-page-component {
+    max-width: 390px;
+    padding: 12px;
+
+    .spacer {
+        height: 32px;
+    }
+
+    .header-section {
+        
+        .header {
+            text-align: left;
+            color: gray;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+    }
+
+    .actions-section {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .input {
+            width: 100%;
+        }
+
+        .spacer {
+            width: 12px;
+        }
+
+        .button {
+            width: 120px;
+        }
+    }
+
+    .characters-section {
+
+        .spacer {
+            height: 24px;
+        }
+    }
+
+}

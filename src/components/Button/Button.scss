@@ -1,0 +1,16 @@
+.button {
+    background-color: crimson;
+    border: none;
+    border-radius: 4px;
+    width: 100%;
+    padding: 4px;
+}
+
+.button-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: crimson;
+    color: white;
+}

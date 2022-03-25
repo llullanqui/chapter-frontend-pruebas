@@ -1,0 +1,25 @@
+.input-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    border: 1px grey solid;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+.input-icon {
+    color: grey;
+}
+
+.input-input {
+    border: none;
+    height: 100%;
+    width: 100%;
+    outline: none;
+    color: grey;
+    
+    &:focus {
+        border: none;
+    }
+}

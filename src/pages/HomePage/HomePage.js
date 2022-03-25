@@ -27,9 +27,8 @@ const HomePage = () => {
   }, [])
 
   useEffect(() => {
-    console.log(searchText);
+    getCharacters(searchText);
   }, [searchText])
-  
   
   const renderCharacter = (item, index) => {
     return <div className='characters-section' key={`character${index}`}>

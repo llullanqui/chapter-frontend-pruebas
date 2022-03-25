@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { deleteCharacter, getCharacter } from '../../api';
+import { createCharacter, deleteCharacter, getCharacter, updateCharacter } from '../../api';
 import Button from '../../components/Button/Button';
 import Character from '../../components/Character/Character';
+import Editor from '../../components/Editor/Editor';
 import Input from '../../components/Input';
 import { HOME_PAGE_HEADER } from '../../utils/texts';
 import './HomePage.scss';
@@ -11,7 +12,7 @@ const HomePage = () => {
   const [characters, setCharacters] = useState([]);
   const [searchText, setSearchText] = useState('');
   const [showEditor, setShowEditor] = useState(false);
-  const [currentCharacter, setCurrentCharacter] = useState(null);
+  const [currentCharacter, setCurrentCharacter] = useState({});
   const componentIsMounted = useRef(true);
 
   const getCharacters = async (name) => {
@@ -24,11 +25,28 @@ const HomePage = () => {
   const deleteCharacterById = async (id) => {
     const {status} = await deleteCharacter(id);
     if(status === 200) {
-      let currentCharacters = [...characters];
-      const index = currentCharacters.find(element => element._id === id)
-      currentCharacters.splice(index, 1);
-      console.log(currentCharacters);
-      setCharacters(currentCharacters);
+      getCharacters();
+    }
+  }
+
+  const createNewCharacter = async () => {
+    const {status} = await createCharacter({
+      ...currentCharacter,
+      category: "main",
+      createdAt: Date.now(),
+      updatedAt: Date.now()
+    });
+    if(status === 200) {
+      getCharacters();
+    }
+  }
+
+  const updateCharacterById = async ({id}) => {
+    const {status} = await updateCharacter(id);
+    if(status === 200) {
+      getCharacters();
+      setCurrentCharacter({});
+      setShowEditor(false);
     }
   }
 
@@ -47,7 +65,10 @@ const HomePage = () => {
     return <div className='characters-section' key={`character${index}`}>
       <Character name={item.title} 
         image={item.image}
-        editAction={() => {}}
+        editAction={() => {
+          setCurrentCharacter(item);
+          setShowEditor(true);
+        }}
         deleteAction={() => {
           deleteCharacterById(item._id);
         }}
@@ -71,9 +92,40 @@ const HomePage = () => {
         </div>
         <div className='spacer'/>
         <div className='button'>
-          <Button text={"Nuevo"} icon="add" />
+          <Button text={"Nuevo"} icon="add" onClick={() => {
+            setShowEditor(true);
+            setCurrentCharacter({});
+          }}/>
         </div>
       </div>
+      {showEditor && currentCharacter && <div className='editor-section'>
+        <div className='spacer'/>
+        <Editor currentCharacter={currentCharacter}
+          setName={(value) => {
+            setCurrentCharacter({
+              ...currentCharacter,
+              title: value,
+            })
+          }}
+          setDescription={(value) => {
+            setCurrentCharacter({
+              ...currentCharacter,
+              body: value,
+            })
+          }}
+          setImage={(value) => {
+            setCurrentCharacter({
+              ...currentCharacter,
+              image: value,
+            })
+          }}
+          saveAction={currentCharacter !== {} ? createNewCharacter : updateCharacterById}
+          cancelAction={() => {
+            setCurrentCharacter({});
+            setShowEditor(false);
+          }}
+        />
+      </div>}
       <div className='spacer'/>
       {characters.map((item, index) => renderCharacter(item, index))}
       <div className='spacer'/>

@@ -1,25 +1,35 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from '../Button';
 import Input from '../Input';
+import './Editor.scss'
 
-const Editor = ({initialName = '', initialDescription = '', initialImage = '', saveAction, cancelAction}) => {
+const Editor = ({objectId, currentCharacter = {}, setName, setDescription, setImage, saveAction, cancelAction}) => {
 
-  const [name, setName] = useState(initialName);
-  const [description, setDescription] = useState(initialDescription);
-  const [image, setImage] = useState(initialImage);
+  const [character, setCharacter] = useState(currentCharacter);
+
+  useEffect(() => {
+    console.log(character);
+  }, [character])
   
   return (
     <div className='editor-component' data-testid="EditorId">
-      <div>
-        <Input initalValue={name} placeholder={"Nombre"} onInput={setName}/>
-        <Input initalValue={description} placeholder={"Descripción"} onInput={setDescription}/>
-        <Input initalValue={image} placeholder={"URL"} onInput={setImage}/>
+      <div className='inputs-section'>
+        <span>Nombre:</span>
+        <Input initialValue={character.title} placeholder={"Nombre"} onInput={setName}/>
+        <div className='spacer' />
+        <span>Descripción:</span>
+        <Input initialValue={character.body} placeholder={"Descripción"} onInput={setDescription}/>
+        <div className='spacer' />
+        <span>Imagen:</span>
+        <Input initialValue={character.image} placeholder={"URL"} onInput={setImage}/>
       </div>
+      <div className='spacer' />
       <div className='buttons-section'>
-        <div>
+        <div className='button'>
           <Button text={"Guardar"} icon={"save"} onClick={saveAction}/>
         </div>
-        <div>
+        <div className='spacer'/>
+        <div className='button'>
           <Button text={"Cancelar"} icon={"cancel"} onClick={cancelAction}/>
         </div>
       </div>

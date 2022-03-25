@@ -1,0 +1,30 @@
+.editor-component {
+    background-color: white;
+    padding: 12px;
+    border-radius: 4px;
+    border: 1px gray solid;
+
+    .spacer {
+        height: 24px;
+    }
+
+    .inputs-section {
+        text-align: left;
+
+        .spacer {
+            height: 12px;
+        }
+    }
+
+    .buttons-section {
+        display: flex;
+
+        .button {
+            width: 100%;
+        }
+
+        .spacer {
+            width: 12px;
+        }
+    }
+}
